@@ -60,12 +60,12 @@ public class IdentityController : ControllerBase
         var user = this.userManager.Users.FirstOrDefault(u => u.Email == dto.Email);
         if (user == null)
         {
-            return Unauthorized();
+            return BadRequest(JsonSerializer.Serialize<IEnumerable<string>>(["Incorrect email or password"]));
         }
         var signInResult = await this.signInManager.PasswordSignInAsync(user, dto.Password, true, true);
         if (signInResult.Succeeded == false)
         {
-            return Unauthorized();
+            return BadRequest(JsonSerializer.Serialize<IEnumerable<string>>(["Incorrect email or password"]));
         }
 
 

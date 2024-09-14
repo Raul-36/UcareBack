@@ -32,8 +32,6 @@ public class CardController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Card>> PostCard(Card card)
     {
-        var email = User.FindFirstValue(ClaimTypes.Email);
-        card.UserEmail = email;
         await cards.AddCardAsync(card);
         return CreatedAtAction(nameof(GetCard), new { id = card.Id }, card);
     }

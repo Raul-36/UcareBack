@@ -20,16 +20,7 @@ namespace UcareBackApp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
-            modelBuilder.Entity<IdentityUser>()
-            .HasIndex(u => u.Email)
-            .IsUnique();
 
-            modelBuilder.Entity<Card>()
-                .HasOne<IdentityUser>() 
-                .WithMany() 
-                .HasForeignKey(c => c.UserEmail)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
