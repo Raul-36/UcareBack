@@ -29,7 +29,7 @@ public class CardController : ControllerBase
         return Ok(card);
     }
 
-    [HttpPost]
+    [HttpPost("/api/[controller]")]
     public async Task<ActionResult<Card>> PostCard(Card card)
     {
         await cards.AddCardAsync(card);

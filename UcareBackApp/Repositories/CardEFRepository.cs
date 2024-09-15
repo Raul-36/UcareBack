@@ -43,8 +43,9 @@ public class CardEfRepository : ICardRepository
             {
                 throw new ArgumentNullException(nameof(updatedCard));
             }
+            var findCard = context.Cards.Find(updatedCard.Id);
 
-            context.Cards.Update(updatedCard);
+            context.Cards.Entry(findCard).CurrentValues.SetValues(updatedCard);
             await context.SaveChangesAsync();
         }
         public async Task DeleteCardAsync(int id)

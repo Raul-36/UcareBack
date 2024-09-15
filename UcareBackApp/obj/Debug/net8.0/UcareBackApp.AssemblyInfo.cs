@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UcareBackApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5eb4674a0a7d5d0fddae295258d9c67cd016fed0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d7624b1931e456b00f5cc5e9e40f70de3769cd73")]
 [assembly: System.Reflection.AssemblyProductAttribute("UcareBackApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UcareBackApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
