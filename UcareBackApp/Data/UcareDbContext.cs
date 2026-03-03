@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using UcareBackApp.Models;
+using UcareBackApp.Cards.Entities;
+using UcareBackApp.Identity.Entities;
 
 namespace UcareBackApp.Data
 {
-    public class UcareDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
+    public class UcareDbContext : IdentityDbContext<UcareUser, UcareRole, Guid>
     {
         public DbSet<Card> Cards { get; set; }
 
@@ -21,6 +22,13 @@ namespace UcareBackApp.Data
         {
             base.OnModelCreating(modelBuilder);
 
+                modelBuilder.Entity<UcareUser>(entity =>
+                {
+                    entity.HasOne<Card>()
+                        .WithOne()
+                        .HasForeignKey<Card>(c => c.UserId)
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
         }
     }
 }

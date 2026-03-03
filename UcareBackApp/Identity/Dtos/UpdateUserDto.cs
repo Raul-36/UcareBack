@@ -8,8 +8,8 @@ namespace UcareBackApp.Dtos
     public class UpdateUserDto
     {
 
-        public string CurrentEmail { get; set; }
-        public string NewName { get; set; }
-        public string NewEmail { get; set; }
+        public required string CurrentEmail { get; set; }
+        public required string NewName { get; set; }
+        public required string NewEmail { get; set; }
     }
 }

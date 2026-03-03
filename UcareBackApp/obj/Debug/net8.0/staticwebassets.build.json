@@ -1,11 +1,20 @@
 {
   "Version": 1,
-  "Hash": "vybH/4WUhNiFsrXIagkcxOsbZGZiTsIGuhs8T3fYs60=",
+  "Hash": "f7jFCygO3tIAtq0f0ccr7XjEOzEiDgau6vPrSh90AQI=",
   "Source": "UcareBackApp",
   "BasePath": "_content/UcareBackApp",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "UcareBackApp/wwwroot",
+      "Source": "UcareBackApp",
+      "ContentRoot": "/home/raul/projects/Kursach/UcareBack/UcareBackApp/wwwroot/",
+      "BasePath": "_content/UcareBackApp",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [],
+  "Endpoints": []
 }

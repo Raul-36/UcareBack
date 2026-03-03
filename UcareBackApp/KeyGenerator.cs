@@ -5,11 +5,6 @@ public static class KeyGenerator
 {
     public static string GenerateSecureKey()
     {
-        using (var rng = new RNGCryptoServiceProvider())
-        {
-            var keyBytes = new byte[32];
-            rng.GetBytes(keyBytes);
-            return Convert.ToBase64String(keyBytes);
-        }
-    }
-}
+        byte[] keyBytes = RandomNumberGenerator.GetBytes(32);
+        return Convert.ToBase64String(keyBytes);
+    }}

@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 using Npgsql;
 using UcareBackApp.Data;
-using UcareBackApp.Models;
-using UcareBackApp.Repositories.Base;
+using UcareBackApp.Cards.Entities;
+using UcareBackApp.Cards.Repositories.Base;
 
 
 public class CardEfRepository : ICardRepository
@@ -22,33 +22,39 @@ public class CardEfRepository : ICardRepository
             return await context.Cards.ToListAsync();
         }
 
-        public async Task<Card> GetCardAsync(int id)
+        public async Task<Card?> GetCardAsync(Guid id)
         {
             return await context.Cards.FindAsync(id);
         }
-        public async Task AddCardAsync(Card card)
+        public async Task<Card> AddCardAsync(Card card)
         {
             if (card == null)
             {
                 throw new ArgumentNullException(nameof(card));
             }
 
-            await context.Cards.AddAsync(card);
+            var addedCard = (await context.Cards.AddAsync(card)).Entity;
             await context.SaveChangesAsync();
+            return addedCard;
         }
 
-        public async Task UpdateCardAsync(Card updatedCard)
+        public async Task<Card> UpdateCardAsync(Card updatedCard)
         {
             if (updatedCard == null)
             {
                 throw new ArgumentNullException(nameof(updatedCard));
             }
-            var findCard = context.Cards.Find(updatedCard.Id);
+            var findCard = await context.Cards.FindAsync(updatedCard.Id);
+            if (findCard == null)
+            {
+                throw new ArgumentException("Card not found", nameof(updatedCard.Id));
+            }
 
-            context.Cards.Entry(findCard).CurrentValues.SetValues(updatedCard);
+            var updatedCardEntity = context.Cards.Update(updatedCard).Entity;
             await context.SaveChangesAsync();
+            return updatedCardEntity;
         }
-        public async Task DeleteCardAsync(int id)
+        public async Task DeleteCardAsync(Guid id)
         {
             var card = await context.Cards.FindAsync(id);
             if (card == null)
