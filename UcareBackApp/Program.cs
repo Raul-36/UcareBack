@@ -29,6 +29,7 @@ builder.Services.AddDbContext<UcareDbContext>(options =>
     var connectinoString = builder.Configuration.GetConnectionString("psqlDb");
     options.UseNpgsql(connectinoString);
 });
+builder.Services.Add
 builder.Services.InitAspnetIdentity(builder.Configuration);
 builder.Services.AddTransient<IImageService, ImageService>();
 builder.Services.AddTransient<ICardRepository, CardEfRepository>();
