@@ -41,7 +41,7 @@ public class CardsController : ControllerBase
 
     [Authorize]
     [HttpPost]
-    public async Task<ActionResult<FullCardResponse>> PostCard([FromForm] CreateCardRequest request)
+    public async Task<ActionResult<FullCardResponse>> PostCard([FromBody] CreateCardRequest request)
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!Guid.TryParse(userIdString, out var userId))
@@ -62,7 +62,7 @@ public class CardsController : ControllerBase
 
     [Authorize]
     [HttpPut()]
-    public async Task<IActionResult> PutCard([FromForm] UpdateCardRequest request)
+    public async Task<IActionResult> PutCard([FromBody] UpdateCardRequest request)
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!Guid.TryParse(userIdString, out var userId))
