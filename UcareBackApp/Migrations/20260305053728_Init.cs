@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using UcareBackApp.Chats.Entities;
 
 #nullable disable
 
@@ -30,7 +32,7 @@ namespace UcareBackApp.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -182,6 +184,25 @@ namespace UcareBackApp.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Chats",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
+                    CardId = table.Column<Guid>(type: "uuid", nullable: true),
+                    Messages = table.Column<List<Message>>(type: "jsonb", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Chats", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Chats_Cards_CardId",
+                        column: x => x.CardId,
+                        principalTable: "Cards",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -224,6 +245,11 @@ namespace UcareBackApp.Migrations
                 table: "Cards",
                 column: "UserId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Chats_CardId",
+                table: "Chats",
+                column: "CardId");
         }
 
         /// <inheritdoc />
@@ -245,10 +271,13 @@ namespace UcareBackApp.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Cards");
+                name: "Chats");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Cards");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -28,7 +28,7 @@ namespace UcareBackApp.Cards.Services
                 if (user == null)
                     return false;
 
-                var isAdmin = await userManager.IsInRoleAsync(user, "Admin");
+                var isAdmin = await userManager.IsInRoleAsync(user, "admin");
                 if (isAdmin)
                     return true;
                     

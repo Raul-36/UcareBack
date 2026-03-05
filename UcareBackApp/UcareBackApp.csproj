@@ -20,5 +20,10 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.2" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\systemPrompt.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>

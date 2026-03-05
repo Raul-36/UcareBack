@@ -24,8 +24,11 @@ services:
       dockerfile: UcareBackApp/Dockerfile
     ports:
       - "8080:8080"
+    env_file:
+      - .env   
     environment:
       ConnectionStrings__psqlDb: Server=db;Port=5432;Database=ucare_db;User Id=postgres;Password=postgres;
+      LLM__ModelId: gemini-2.5-flash
     depends_on:
       db:
         condition: service_healthy

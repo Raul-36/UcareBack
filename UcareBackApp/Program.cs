@@ -11,8 +11,20 @@ using UcareBackApp.Cards.Repositories.Base;
 using UcareBackApp.Cards.Services.Base;
 using UcareBackApp.Cards.Services;
 using UcareBackApp.Services.ImageService;
+using UcareBackApp.Options;
+using Microsoft.Extensions.AI;
+using GenerativeAI.Microsoft;
+using Microsoft.Extensions.Options;
+using UcareBackApp.Chats.Repositories.Base;
+using UcareBackApp.Chats.Repositories;
+using UcareBackApp.Chats.Services.Base;
+using UcareBackApp.Chats.Services;
+using Npgsql;
+using UcareBackApp.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin",
@@ -24,17 +36,31 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.InitSwagger();
+
+var connectionString = builder.Configuration.GetConnectionString("psqlDb");
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
+dataSourceBuilder.EnableDynamicJson();
+var dataSource = dataSourceBuilder.Build();
 builder.Services.AddDbContext<UcareDbContext>(options =>
 {
-    var connectinoString = builder.Configuration.GetConnectionString("psqlDb");
-    options.UseNpgsql(connectinoString);
+    options.UseNpgsql(dataSource);
 });
-builder.Services.Add
+
+builder.Services.Configure<LLMOptions>(builder.Configuration.GetSection("LLM"));
+
+builder.Services.AddSingleton<IChatClient>(sp =>
+{
+    var llmOptions = sp.GetRequiredService<IOptions<LLMOptions>>().Value;
+    return new GenerativeAIChatClient(llmOptions.ApiKey, llmOptions.ModelId);
+});
+
 builder.Services.InitAspnetIdentity(builder.Configuration);
 builder.Services.AddTransient<IImageService, ImageService>();
 builder.Services.AddTransient<ICardRepository, CardEfRepository>();
 builder.Services.AddTransient<ICardAccessChecker, CardAccessChecker>();
 builder.Services.AddTransient<ICardService, CardService>();
+builder.Services.AddTransient<IChatRepository, ChatEFRepository>();
+builder.Services.AddTransient<IChatService, LLMChatService>();
 builder.Services.AddControllers();
 
 var app = builder.Build();
@@ -61,5 +87,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await DbSeeder.SeedAdminAsync(services);
+}
 
 app.Run();

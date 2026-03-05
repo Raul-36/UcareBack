@@ -19,12 +19,12 @@ public class CardEfRepository : ICardRepository
     
         public async Task<IEnumerable<Card>> GetCardsAsync()
         {
-            return await context.Cards.ToListAsync();
+            return await context.Cards.AsNoTracking().ToListAsync();
         }
 
         public async Task<Card?> GetCardAsync(Guid id)
         {
-            return await context.Cards.FindAsync(id);
+            return await context.Cards.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
         }
         public async Task<Card> AddCardAsync(Card card)
         {

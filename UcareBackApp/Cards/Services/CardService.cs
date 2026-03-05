@@ -31,7 +31,6 @@ namespace UcareBackApp.Cards.Services
 
             var newCard = new Card
             {
-                Id = Guid.NewGuid(),
                 Name = request.Name,
                 Address = request.Address,
                 Occupation = request.Occupation,
@@ -39,8 +38,8 @@ namespace UcareBackApp.Cards.Services
                 Latitude = request.Latitude,
                 Longitude = request.Longitude,
                 UserId = userId,
+                ImageUrl = await this.imageService.AddImageAsync(request.Image, $"{Guid.NewGuid()}.jpg")
             };
-            newCard.ImageUrl = await this.imageService.AddImageAsync(request.Image, $"{newCard.Id}.jpg");
             var addedCard = await cardRepository.AddCardAsync(newCard);
             return new FullCardResponse
             {

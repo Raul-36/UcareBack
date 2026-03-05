@@ -353,3 +353,16 @@ C:/Users/Abbas_el71/Desktop/UcareBack/UcareBackApp/obj/Debug/net8.0/ref/UcareBac
 /home/raul/projects/Kursach/UcareBack/UcareBackApp/obj/Debug/net8.0/UcareBackApp.pdb
 /home/raul/projects/Kursach/UcareBack/UcareBackApp/obj/Debug/net8.0/UcareBackApp.genruntimeconfig.cache
 /home/raul/projects/Kursach/UcareBack/UcareBackApp/obj/Debug/net8.0/ref/UcareBackApp.dll
+/home/raul/projects/Kursach/UcareBack/UcareBackApp/bin/Debug/net8.0/GenerativeAI.dll
+/home/raul/projects/Kursach/UcareBack/UcareBackApp/bin/Debug/net8.0/GenerativeAI.Microsoft.dll
+/home/raul/projects/Kursach/UcareBack/UcareBackApp/bin/Debug/net8.0/Microsoft.Extensions.AI.Abstractions.dll
+/home/raul/projects/Kursach/UcareBack/UcareBackApp/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.dll
+/home/raul/projects/Kursach/UcareBack/UcareBackApp/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/home/raul/projects/Kursach/UcareBack/UcareBackApp/bin/Debug/net8.0/Microsoft.Extensions.Logging.dll
+/home/raul/projects/Kursach/UcareBack/UcareBackApp/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
+/home/raul/projects/Kursach/UcareBack/UcareBackApp/bin/Debug/net8.0/Microsoft.Extensions.Primitives.dll
+/home/raul/projects/Kursach/UcareBack/UcareBackApp/bin/Debug/net8.0/System.Diagnostics.DiagnosticSource.dll
+/home/raul/projects/Kursach/UcareBack/UcareBackApp/bin/Debug/net8.0/System.IO.Pipelines.dll
+/home/raul/projects/Kursach/UcareBack/UcareBackApp/bin/Debug/net8.0/System.Text.Encodings.Web.dll
+/home/raul/projects/Kursach/UcareBack/UcareBackApp/bin/Debug/net8.0/System.Text.Json.dll
+/home/raul/projects/Kursach/UcareBack/UcareBackApp/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
